@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "go-ticket-sales-api",
     "go-ticket-sales-api/internal/events",
-    " go-ticket-sales-api/cmd/events"
+    " go-ticket-sales-api/cmd/events",
+    "go-ticket-sales-api/docs"
   ]
 }
