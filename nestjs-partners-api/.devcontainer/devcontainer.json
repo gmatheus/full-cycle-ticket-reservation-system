@@ -13,7 +13,8 @@
   "service": "app",
   // The optional 'workspaceFolder' property is the path VS Code should open by default when
   // connected. This is typically a file mount in .devcontainer/docker-compose.yml
-  "workspaceFolder": "/home/node/app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/devcontainers/features/node:1": {},
@@ -23,17 +24,29 @@
     },
     "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
   },
+  // Configure tool-specific properties.
   "customizations": {
     "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      },
       "extensions": [
-        "prisma.prisma",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "vivaxy.vscode-conventional-commits",
+        "streetsidesoftware.code-spell-checker",
+        "prisma.prisma",
+        "humao.rest-client"
       ]
     }
-  }
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+  },
+  "postStartCommand": "git config --global --add safe.directory /workspaces && zsh"
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Uncomment the next line if you want start specific services in your Docker Compose config.
@@ -42,8 +55,6 @@
   // "shutdownAction": "none",
   // Uncomment the next line to run commands after the container is created.
   // "postCreateCommand": "cat /etc/os-release",
-  // Configure tool-specific properties.
-  // "customizations": {},
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "devcontainer"
 }
