@@ -7,11 +7,14 @@ import {
   Param,
   Delete,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { SpotsService } from '@app/core/spots/spots.service';
+import { AuthGuard } from '@app/core/auth/auth.guard';
 import { CreateSpotRequest } from './request/create-spot.request';
 import { UpdateSpotRequest } from './request/update-spot.request';
 
+@UseGuards(AuthGuard)
 @Controller('events/:eventId/spots')
 export class SpotsController {
   constructor(private readonly spotsService: SpotsService) {}

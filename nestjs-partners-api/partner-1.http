@@ -1,11 +1,15 @@
+@baseUrl = http://localhost:3000
+@apiToken = 123
+
 ################
 #### Events ####
 ################
 
 ### Create Event
 # @name createEvent
-POST http://localhost:3000/events
+POST {{baseUrl}}/events
 Content-Type: application/json
+X-Api-Token: {{apiToken}}
 
 {
   "name": "Event 1",
@@ -18,15 +22,18 @@ Content-Type: application/json
 @eventId = {{ createEvent.response.body.id }}
 
 ### Get All Events
-GET http://localhost:3000/events
+GET  {{baseUrl}}/events
+X-Api-Token: {{apiToken}}
+
 
 ### Get Event
-GET http://localhost:3000/events/{{eventId}}
-
+GET {{baseUrl}}/events/{{eventId}}
+X-Api-Token: {{apiToken}}
 
 ### Update Event
-PATCH http://localhost:3000/events/{{eventId}}
+PATCH {{baseUrl}}/events/{{eventId}}
 Content-Type: application/json
+X-Api-Token: {{apiToken}}
 
 {
   "name": "Event 1",
@@ -36,7 +43,8 @@ Content-Type: application/json
 }
 
 ### Delete Event
-DELETE http://localhost:3000/events/{{eventId}}
+DELETE {{baseUrl}}/events/{{eventId}}
+X-Api-Token: {{apiToken}}
 
 ###############
 #### Spots ####
@@ -44,8 +52,9 @@ DELETE http://localhost:3000/events/{{eventId}}
 
 ### Create Spot
 # @name createSpot
-POST http://localhost:3000/events/{{eventId}}/spots
+POST {{baseUrl}}/events/{{eventId}}/spots
 Content-Type: application/json
+X-Api-Token: {{apiToken}}
 
 {
   "name": "A1"
@@ -56,29 +65,33 @@ Content-Type: application/json
 @spotName = {{ createSpot.response.body.name }}
 
 ### Get All Spots
-GET http://localhost:3000/events/{{eventId}}/spots
+GET {{baseUrl}}/events/{{eventId}}/spots
+X-Api-Token: {{apiToken}}
 
 ### Get Spot
-GET http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
-
+GET {{baseUrl}}/events/{{eventId}}/spots/{{spotId}}
+X-Api-Token: {{apiToken}}
 
 ### Update Spot
-PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+PATCH {{baseUrl}}/events/{{eventId}}/spots/{{spotId}}
 Content-Type: application/json
+X-Api-Token: {{apiToken}}
 
 {
   "name": "A2"
 }
 
 ### Delete Spot
-DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+DELETE {{baseUrl}}/events/{{eventId}}/spots/{{spotId}}
+X-Api-Token: {{apiToken}}
 
 ### Reserve Spot
-POST http://localhost:3000/events/{{eventId}}/reserve
+POST {{baseUrl}}/events/{{eventId}}/reserve
 Content-Type: application/json
+X-Api-Token: {{apiToken}}
 
 {
-  "spots": ["{{ spotName }}"],
+  "spots": ["{{spotName}}"],
   "ticketType": "full",
   "email": "test@test.com"
 }
