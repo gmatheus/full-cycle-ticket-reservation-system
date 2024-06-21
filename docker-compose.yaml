@@ -1,4 +1,11 @@
 services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+
   db:
     image: mysql:8.0.30-debian
     environment:
@@ -6,3 +13,5 @@ services:
       MYSQL_DATABASE: nest
     ports:
       - 3306:3306
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql
