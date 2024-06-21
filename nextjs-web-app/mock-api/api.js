@@ -79,7 +79,7 @@ app.post("/checkout", async (req, res) => {
     }
     if (eventSpots[spotIndex].status !== "available") {
       return res.status(400).json({
-        message: `Spot ${eventSpots[spotIndex].id} is not available`,
+        message: `Spot ${eventSpots[spotIndex].name} is not available`,
       });
     }
     eventSpots[spotIndex].status = "sold";
