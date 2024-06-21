@@ -1,4 +1,3 @@
-import { getSelectedSpots } from "@/actions";
 import { EventModel } from "@/models";
 import { TICKET_SALES_API_URL } from "@/utils/consts";
 import { formatDate } from "@/utils/date";
@@ -16,11 +15,13 @@ export async function getEvent(eventId: string): Promise<EventModel> {
 
 export default async function CheckoutSuccessPage({
   params,
+  searchParams,
 }: {
   params: { eventId: string };
+  searchParams: { selectedSpots: string[] };
 }) {
   const event = await getEvent(params.eventId);
-  const selectedSpots = await getSelectedSpots(params.eventId);
+  const { selectedSpots = [] } = searchParams;
   return (
     <main className="mt-10 flex flex-col flex-wrap items-center ">
       <Title>Compra realizada com sucesso!</Title>

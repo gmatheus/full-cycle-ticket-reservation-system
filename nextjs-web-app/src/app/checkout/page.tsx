@@ -53,7 +53,7 @@ export default async function CheckoutPage() {
         <Title>Informações de pagamento</Title>
         <CheckoutForm className="mt-6 flex flex-col gap-y-3">
           <div className="flex flex-col">
-            <label htmlFor="titular">E-mail</label>
+            <label htmlFor="email">E-mail</label>
             <input
               type="email"
               name="email"
@@ -61,7 +61,7 @@ export default async function CheckoutPage() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="titular">Nome no cartão</label>
+            <label htmlFor="card_name">Nome no cartão</label>
             <input
               type="text"
               name="card_name"
@@ -78,7 +78,7 @@ export default async function CheckoutPage() {
           </div>
           <div className="flex flex-wrap sm:justify-between">
             <div className="flex w-full flex-col md:w-auto">
-              <label htmlFor="expire">Vencimento</label>
+              <label htmlFor="expire_date">Vencimento</label>
               <input
                 type="text"
                 name="expire_date"

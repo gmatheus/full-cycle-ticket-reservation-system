@@ -41,6 +41,12 @@ export async function unselectSpot(eventId: string, spotName: string) {
   cookieStore.set("spots", JSON.stringify(newSpots));
 }
 
+export async function clearSpotsSelection() {
+  const cookieStore = cookies();
+  cookieStore.set("spots", "[]");
+  cookieStore.set("eventId", "");
+}
+
 export async function selectTicketType(ticketType: "full" | "half") {
   const cookieStore = cookies();
   cookieStore.set("ticketType", ticketType);
@@ -54,7 +60,7 @@ export async function checkout({
   email: string;
 }) {
   const eventId = (await getSelectedEventId()) as string;
-  const spots = await getSelectedSpots(eventId);
+  const selectedSpots = await getSelectedSpots(eventId);
   const ticketType = await getSelectedTicketType();
 
   const response = await fetch(`${TICKET_SALES_API_URL}/checkout`, {
@@ -63,7 +69,7 @@ export async function checkout({
       event_id: eventId,
       card_hash: cardHash,
       ticket_type: ticketType,
-      spots,
+      spots: selectedSpots,
       email,
     }),
     headers: {
@@ -76,6 +82,11 @@ export async function checkout({
     throw new Error(`Erro ao realizar a compra: ${message}`);
   }
 
+  var successSearchParams = new URLSearchParams(
+    selectedSpots.map((spot) => ["selectedSpots", spot])
+  );
+
   revalidateTag(`events/${eventId}`);
-  redirect(`/checkout/${eventId}/success`);
+  await clearSpotsSelection();
+  redirect(`/checkout/${eventId}/success/?${successSearchParams.toString()}`);
 }
