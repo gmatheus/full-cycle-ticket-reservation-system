@@ -1,3 +1,7 @@
+################
+#### Events ####
+################
+
 ### Create Event
 # @name createEvent
 POST http://localhost:3000/events
@@ -17,11 +21,11 @@ Content-Type: application/json
 GET http://localhost:3000/events
 
 ### Get Event
-GET http://localhost:3000/events/{{ eventId }}
+GET http://localhost:3000/events/{{eventId}}
 
 
 ### Update Event
-PATCH http://localhost:3000/events/{{ eventId }}
+PATCH http://localhost:3000/events/{{eventId}}
 Content-Type: application/json
 
 {
@@ -32,4 +36,39 @@ Content-Type: application/json
 }
 
 ### Delete Event
-DELETE http://localhost:3000/events/{{ eventId }}
+DELETE http://localhost:3000/events/{{eventId}}
+
+###############
+#### Spots ####
+###############
+
+### Create Spot
+# @name createSpot
+POST http://localhost:3000/events/{{eventId}}/spots
+Content-Type: application/json
+
+{
+  "name": "A1"
+}
+
+
+###
+@spotId = {{ createSpot.response.body.id }}
+
+### Get All Spots
+GET http://localhost:3000/events/{{eventId}}/spots
+
+### Get Spot
+GET http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+
+
+### Update Spot
+PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+Content-Type: application/json
+
+{
+  "status": "reserved"
+}
+
+### Delete Spot
+DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}

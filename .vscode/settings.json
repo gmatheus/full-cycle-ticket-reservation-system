@@ -1,5 +1,5 @@
 {
-  "conventionalCommits.scopes": ["events", "prisma"],
+  "conventionalCommits.scopes": ["events", "prisma", "spots"],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   }
