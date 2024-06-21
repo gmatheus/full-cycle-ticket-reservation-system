@@ -1,5 +1,9 @@
 {
-  "conventionalCommits.scopes": ["events", "prisma", "spots"],
+  "conventionalCommits.scopes": [
+    "nestjs-partners-api/events",
+    "nestjs-partners-api/prisma",
+    "nestjs-partners-api/spots"
+  ],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   }

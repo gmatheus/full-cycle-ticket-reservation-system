@@ -51,9 +51,9 @@ Content-Type: application/json
   "name": "A1"
 }
 
-
 ###
 @spotId = {{ createSpot.response.body.id }}
+@spotName = {{ createSpot.response.body.name }}
 
 ### Get All Spots
 GET http://localhost:3000/events/{{eventId}}/spots
@@ -67,8 +67,18 @@ PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
 Content-Type: application/json
 
 {
-  "status": "reserved"
+  "name": "A2"
 }
 
 ### Delete Spot
 DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+
+### Reserve Spot
+POST http://localhost:3000/events/{{eventId}}/reserve
+Content-Type: application/json
+
+{
+  "spots": ["{{ spotName }}"],
+  "ticketType": "full",
+  "email": "test@test.com"
+}
