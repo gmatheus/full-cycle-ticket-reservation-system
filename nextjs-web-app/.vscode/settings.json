@@ -4,6 +4,7 @@
     "nextjs-web-app/mock-api",
     "nextjs-web-app/utils",
     "nextjs-web-app/components",
-    "nextjs-web-app/app"
+    "nextjs-web-app/app",
+    "nextjs-web-app/public"
   ]
 }
