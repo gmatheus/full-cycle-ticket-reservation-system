@@ -1,0 +1,10 @@
+
+@baseUrl = http://localhost:3000
+@eventId = 1
+
+####################
+#### Revalidate ####
+####################
+
+### Revalidate Event Webhook 
+POST {{baseUrl}}/api/events/{{eventId}}/revalidate
