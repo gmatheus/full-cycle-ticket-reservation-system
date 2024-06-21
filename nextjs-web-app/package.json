@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:mock:api": "yarn --cwd 'mock-api' install && yarn --cwd 'mock-api' start",
     "lint": "next lint"
   },
   "dependencies": {

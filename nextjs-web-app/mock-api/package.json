@@ -1,0 +1,15 @@
+{
+  "name": "mock-api",
+  "version": "1.0.0",
+  "description": "Mocked API for nextjs-web-app",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

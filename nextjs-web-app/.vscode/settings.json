@@ -1,5 +1,6 @@
 {
   "conventionalCommits.scopes": [
-    "nextjs-web-app"
+    "nextjs-web-app",
+    "nextjs-web-app/mock-api"
   ]
 }
