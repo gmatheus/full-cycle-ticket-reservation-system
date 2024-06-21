@@ -1,5 +1,6 @@
 {
   "conventionalCommits.scopes": [
+    "nestjs-partners-api",
     "nestjs-partners-api/events",
     "nestjs-partners-api/prisma",
     "nestjs-partners-api/spots"

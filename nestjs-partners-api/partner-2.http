@@ -1,0 +1,84 @@
+################
+#### Events ####
+################
+
+### Create Event
+# @name createEvent
+POST http://localhost:3001/events
+Content-Type: application/json
+
+{
+  "name": "Event 1",
+  "description": "First event",
+  "date": "2024-06-17T00:00:00", 
+  "price": 100
+}
+
+###
+@eventId = {{ createEvent.response.body.id }}
+
+### Get All Events
+GET http://localhost:3001/events
+
+### Get Event
+GET http://localhost:3001/events/{{eventId}}
+
+
+### Update Event
+PATCH http://localhost:3001/events/{{eventId}}
+Content-Type: application/json
+
+{
+  "name": "Event 1",
+  "description": "First event - updated",
+  "date": "2024-06-17T00:00:00", 
+  "price": 100
+}
+
+### Delete Event
+DELETE http://localhost:3001/events/{{eventId}}
+
+###############
+#### Spots ####
+###############
+
+### Create Spot
+# @name createSpot
+POST http://localhost:3001/events/{{eventId}}/spots
+Content-Type: application/json
+
+{
+  "name": "A1"
+}
+
+###
+@spotId = {{ createSpot.response.body.id }}
+@spotName = {{ createSpot.response.body.name }}
+
+### Get All Spots
+GET http://localhost:3001/events/{{eventId}}/spots
+
+### Get Spot
+GET http://localhost:3001/events/{{eventId}}/spots/{{spotId}}
+
+
+### Update Spot
+PATCH http://localhost:3001/events/{{eventId}}/spots/{{spotId}}
+Content-Type: application/json
+
+{
+  "name": "A2"
+}
+
+### Delete Spot
+DELETE http://localhost:3001/events/{{eventId}}/spots/{{spotId}}
+
+### Reserve Spot
+POST http://localhost:3001/events/{{eventId}}/reserve
+Content-Type: application/json
+
+{
+  "spots": ["{{ spotName }}"],
+  "ticketType": "full",
+  "email": "test@test.com"
+}

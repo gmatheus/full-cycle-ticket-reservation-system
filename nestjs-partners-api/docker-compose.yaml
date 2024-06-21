@@ -3,6 +3,7 @@ services:
     build: .
     ports:
       - 3000:3000
+      - 3001:3001
     volumes:
       - .:/home/node/app
 
@@ -10,8 +11,8 @@ services:
     image: mysql:8.0.30-debian
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: nest
     ports:
       - 3306:3306
     volumes:
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
       - ./.docker/dbdata:/var/lib/mysql
