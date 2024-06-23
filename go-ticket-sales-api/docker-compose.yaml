@@ -1,17 +1,27 @@
-version: "3.8"
+# Add this line in your /etc/hosts file:
+# 127.0.0.1 host.docker.internal
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: test-mysql
+  go-ticket-sales-api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      go-ticket-sales-api-mysql:
+        condition: service_healthy
+    entrypoint: sh .docker/app/entrypoint.sh
+
+  go-ticket-sales-api-mysql:
+    image: mysql:8.0.30-debian
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test_db
       MYSQL_USER: test_user
       MYSQL_PASSWORD: test_password
-    ports:
-      # - "3306:3306"
-      - "3307:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s

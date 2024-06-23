@@ -27,8 +27,7 @@ import (
 // @BasePath /
 func main() {
 	// Configuração do banco de dados
-	// db, err := sql.Open("mysql", "test_user:test_password@tcp(localhost:3306)/test_db")
-	db, err := sql.Open("mysql", "test_user:test_password@tcp(localhost:3307)/test_db")
+	db, err := sql.Open("mysql", "test_user:test_password@tcp(go-ticket-sales-api-mysql:3306)/test_db")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,13 +40,9 @@ func main() {
 	}
 
 	// URLs base específicas para cada parceiro
-	// partnerBaseURLs := map[int]string{
-	// 	1: "http://localhost:9000/api1",
-	// 	2: "http://localhost:9000/api2",
-	// }
 	partnerBaseURLs := map[int]string{
-		1: "http://localhost:9000",
-		2: "http://localhost:9001",
+		1: "http://host.docker.internal:8000/partner-1",
+		2: "http://host.docker.internal:8000/partner-2",
 	}
 
 	listEventsUseCase := usecase.NewListEventsUseCase(eventRepo)
