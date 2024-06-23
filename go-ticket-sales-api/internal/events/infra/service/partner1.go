@@ -7,15 +7,13 @@ import (
 	"net/http"
 )
 
-const Partner1ApiToken string = "567" // TODO: replace api-token in api-gateway
-
 type Partner1 struct {
 	BaseURL string
 }
 
 type Partner1ReservationRequest struct {
 	Spots      []string `json:"spots"`
-	TicketType string   `json:"ticket_type"`
+	TicketType string   `json:"ticketType"`
 	Email      string   `json:"email"`
 }
 
@@ -46,7 +44,6 @@ func (p *Partner1) MakeReservation(req *ReservationRequest) ([]ReservationRespon
 		return nil, err
 	}
 	httpReq.Header.Set("Content-Type", "application/json")
-	httpReq.Header.Set("X-Api-Token", Partner1ApiToken)
 
 	client := &http.Client{}
 	httpResp, err := client.Do(httpReq)
