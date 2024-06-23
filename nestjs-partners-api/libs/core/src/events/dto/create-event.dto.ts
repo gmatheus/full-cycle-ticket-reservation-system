@@ -1,7 +1,6 @@
 export class CreateEventDto {
-  id: string;
   name: string;
   description: string;
-  date: Date;
+  date: string;
   price: number;
 }

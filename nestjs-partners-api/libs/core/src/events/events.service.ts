@@ -88,6 +88,9 @@ export class EventsService {
                   type: dto.ticketType,
                   email: dto.email,
                 },
+                include: {
+                  Spot: true,
+                },
               }),
             ),
           );

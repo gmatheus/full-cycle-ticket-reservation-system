@@ -10,10 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { EventsService } from '@app/core/events/events.service';
+import { AuthGuard } from '@app/core/auth/auth.guard';
+import { ReserveSpotResponse } from '@app/core/events/response/reserve-spot.response';
 import { CreateEventRequest } from './request/create-event.request';
 import { UpdateEventRequest } from './request/update-event.request';
 import { ReserveSpotsRequest } from './request/reserve-spot.request';
-import { AuthGuard } from '@app/core/auth/auth.guard';
 
 @UseGuards(AuthGuard)
 @Controller('events')
@@ -50,10 +51,14 @@ export class EventsController {
   }
 
   @Post(':id/reserve')
-  reserveSpots(
+  async reserveSpots(
     @Param('id') id: string,
     @Body() reserveSpotsRequest: ReserveSpotsRequest,
   ) {
-    return this.eventsService.reserveSpots(id, reserveSpotsRequest);
+    const tickets = await this.eventsService.reserveSpots(
+      id,
+      reserveSpotsRequest,
+    );
+    return new ReserveSpotResponse(tickets);
   }
 }

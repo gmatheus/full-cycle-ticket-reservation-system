@@ -1,7 +1,6 @@
 export class CreateEventRequest {
-  id: string;
   name: string;
   description: string;
-  date: Date;
+  date: string;
   price: number;
 }
