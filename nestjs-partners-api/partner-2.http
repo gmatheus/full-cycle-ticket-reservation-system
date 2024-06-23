@@ -1,5 +1,4 @@
-# @baseUrl = http://localhost:3001
-@baseUrl = http://localhost:9001
+@baseUrl = http://localhost:3001
 @apiToken = 456
 
 ################
