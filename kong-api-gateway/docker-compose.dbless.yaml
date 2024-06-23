@@ -1,5 +1,5 @@
 services:
-  kong:
+  kong-api-gateway:
     image: kong:3.7
     restart: on-failure:10
     ports:
@@ -22,3 +22,5 @@ services:
       KONG_ADMIN_GUI_URL: http://localhost:8002
     volumes:
       - ./kong/declarative:/kong/declarative
+    extra_hosts:
+      - host.docker.internal:host-gateway

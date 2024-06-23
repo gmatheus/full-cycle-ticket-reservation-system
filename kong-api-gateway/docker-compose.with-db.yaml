@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  kong:
+  kong-api-gateway:
     image: kong:3.7
     restart: on-failure:10
     ports:
@@ -14,8 +14,7 @@ services:
       - 8004:8004
     environment:
       KONG_DATABASE: postgres
-      # KONG_PG_HOST: localhost
-      KONG_PG_HOST: db
+      KONG_PG_HOST: kong-api-gateway-postgres
       KONG_PG_DATABASE: kong
       KONG_PG_USER: kong
       KONG_PG_PASSWORD: kong
@@ -26,13 +25,10 @@ services:
       KONG_ADMIN_LISTEN: 0.0.0.0:8001
       KONG_ADMIN_GUI_URL: http://localhost:8002
     networks:
-      - custom_network
-    # extra_hosts:
-    #   - host.docker.internal:host-gateway
+      - kong-api-gateway-network
 
-  db:
+  kong-api-gateway-postgres:
     image: postgres:13-alpine
-    # network_mode: "host"
     ports:
       - 5432:5432
     environment:
@@ -45,25 +41,24 @@ services:
       timeout: 30s
       retries: 3
     networks:
-      - custom_network
+      - kong-api-gateway-network
 
-  kong-migrations:
+  kong-api-gateway-migrations:
     image: kong:3.7
     command: kong migrations bootstrap
-    # network_mode: "host"
     environment:
       KONG_DATABASE: postgres
       # KONG_PG_HOST: localhost
-      KONG_PG_HOST: db
+      KONG_PG_HOST: kong-api-gateway-postgres
       KONG_PG_DATABASE: kong
       KONG_PG_USER: kong
       KONG_PG_PASSWORD: kong
     depends_on:
-      db:
+      kong-api-gateway-postgres:
         condition: service_healthy
     networks:
-      - custom_network
+      - kong-api-gateway-network
 
 networks:
-  custom_network:
+  kong-api-gateway-network:
     driver: bridge
