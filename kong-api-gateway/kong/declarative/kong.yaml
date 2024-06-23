@@ -2,22 +2,22 @@ _format_version: "3.0"
 consumers:
   - keyauth_credentials:
       - key: fM7v7vyGvAIkFYYSeWS20H60OzRDygHE
-    username: nextjs
+    username: nextjs-web-app
 services:
   - connect_timeout: 60000
     enabled: true
-    host: localhost
-    name: golang
+    host: host.docker.internal
+    name: go-ticket-sales-api
     port: 8080
     protocol: http
     read_timeout: 60000
     retries: 5
     routes:
       - https_redirect_status_code: 426
-        name: golang
+        name: go-ticket-sales-api
         path_handling: v0
         paths:
-          - /golang
+          - /go-ticket-sales-api
         plugins:
           - config:
               anonymous: null
@@ -46,27 +46,40 @@ services:
     write_timeout: 60000
   - connect_timeout: 60000
     enabled: true
-    host: localhost
-    name: nextjs
+    host: host.docker.internal
+    name: nextjs-web-app
     port: 3002
     protocol: http
     read_timeout: 60000
     retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: nextjs-web-app
+        path_handling: v0
+        paths:
+          - /nextjs-web-app
+        preserve_host: false
+        protocols:
+          - http
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
     write_timeout: 60000
   - connect_timeout: 60000
     enabled: true
-    host: localhost
-    name: partner1
+    host: host.docker.internal
+    name: partner-1
     port: 3000
     protocol: http
     read_timeout: 60000
     retries: 5
     routes:
       - https_redirect_status_code: 426
-        name: partner1
+        name: partner-1
         path_handling: v0
         paths:
-          - /partner1
+          - /partner-1
         plugins:
           - config:
               add:
@@ -109,24 +122,24 @@ services:
     write_timeout: 60000
   - connect_timeout: 60000
     enabled: true
-    host: localhost
-    name: partner2
+    host: host.docker.internal
+    name: partner-2
     port: 3001
     protocol: http
     read_timeout: 60000
     retries: 5
     routes:
       - https_redirect_status_code: 426
-        name: partner2
+        name: partner-2
         path_handling: v0
         paths:
-          - /partner2
+          - /partner-2
         plugins:
           - config:
               add:
                 body: []
                 headers:
-                  - X-Api-Token:000
+                  - X-Api-Token:456
                 querystring: []
               append:
                 body: []
