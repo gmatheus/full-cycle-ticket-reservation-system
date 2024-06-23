@@ -26,10 +26,28 @@
         "tsConfigPath": "apps/partner-1/tsconfig.app.json"
       }
     },
+    "partner-1-fixture": {
+      "type": "application",
+      "root": "apps/partner-1",
+      "entryFile": "fixture-command",
+      "sourceRoot": "apps/partner-1/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/partner-1/tsconfig.app.json"
+      }
+    },
     "partner-2": {
       "type": "application",
       "root": "apps/partner-2",
       "entryFile": "main",
+      "sourceRoot": "apps/partner-2/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/partner-2/tsconfig.app.json"
+      }
+    },
+    "partner-2-fixture": {
+      "type": "application",
+      "root": "apps/partner-2",
+      "entryFile": "fixture-command",
       "sourceRoot": "apps/partner-2/src",
       "compilerOptions": {
         "tsConfigPath": "apps/partner-2/tsconfig.app.json"
