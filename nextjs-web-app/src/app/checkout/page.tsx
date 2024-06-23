@@ -6,7 +6,7 @@ import {
   getSelectedTicketType,
 } from "@/actions";
 import { EventModel } from "@/models";
-import { TICKET_SALES_API_URL } from "@/utils/consts";
+import { TICKET_SALES_API_TOKEN, TICKET_SALES_API_URL } from "@/utils/consts";
 import { formatPrice } from "@/utils/currency";
 import { formatDate } from "@/utils/date";
 
@@ -15,6 +15,7 @@ import { CheckoutForm } from "./CheckoutForm";
 
 export async function getEvent(eventId: string): Promise<EventModel> {
   const response = await fetch(`${TICKET_SALES_API_URL}/events/${eventId}`, {
+    headers: { apikey: TICKET_SALES_API_TOKEN },
     cache: "no-store",
     next: {
       tags: [`events/${eventId}`],

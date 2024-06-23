@@ -1,5 +1,5 @@
 import { EventModel } from "@/models";
-import { TICKET_SALES_API_URL } from "@/utils/consts";
+import { TICKET_SALES_API_TOKEN, TICKET_SALES_API_URL } from "@/utils/consts";
 
 import { Title } from "@/components/Title";
 import { EventCard } from "@/components/EventCard";
@@ -7,6 +7,7 @@ import { EventCard } from "@/components/EventCard";
 export async function getEvents(): Promise<EventModel[]> {
   try {
     const response = await fetch(`${TICKET_SALES_API_URL}/events`, {
+      headers: { apikey: TICKET_SALES_API_TOKEN },
       cache: "no-store",
       next: {
         tags: ["events"],

@@ -3,7 +3,7 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { TICKET_SALES_API_URL } from "./utils/consts";
+import { TICKET_SALES_API_TOKEN, TICKET_SALES_API_URL } from "./utils/consts";
 
 export async function getSelectedEventId(): Promise<string | undefined> {
   const cookieStore = cookies();
@@ -52,13 +52,16 @@ export async function selectTicketType(ticketType: "full" | "half") {
   cookieStore.set("ticketType", ticketType);
 }
 
-export async function checkout({
-  cardHash,
-  email,
-}: {
-  cardHash: string;
-  email: string;
-}) {
+export async function checkout(
+  prevState: any,
+  {
+    cardHash,
+    email,
+  }: {
+    cardHash: string;
+    email: string;
+  }
+) {
   const eventId = (await getSelectedEventId()) as string;
   const selectedSpots = await getSelectedSpots(eventId);
   const ticketType = await getSelectedTicketType();
@@ -74,12 +77,13 @@ export async function checkout({
     }),
     headers: {
       "Content-Type": "application/json",
+      apikey: TICKET_SALES_API_TOKEN,
     },
   });
 
   if (!response.ok) {
-    const { message } = await response.json();
-    throw new Error(`Erro ao realizar a compra: ${message}`);
+    const message = await response.text();
+    return { error: `Erro ao realizar a compra: ${message}` };
   }
 
   var successSearchParams = new URLSearchParams(

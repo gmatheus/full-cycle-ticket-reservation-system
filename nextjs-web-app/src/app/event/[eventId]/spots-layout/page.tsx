@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { TICKET_SALES_API_URL } from "@/utils/consts";
+import { TICKET_SALES_API_TOKEN, TICKET_SALES_API_URL } from "@/utils/consts";
 import { getSelectedSpots, getSelectedTicketType } from "@/actions";
 import { EventModel, SpotModel } from "@/models";
 import { formatPrice } from "@/utils/currency";
@@ -18,6 +18,7 @@ export async function getSpots(eventId: string): Promise<{
   const response = await fetch(
     `${TICKET_SALES_API_URL}/events/${eventId}/spots`,
     {
+      headers: { apikey: TICKET_SALES_API_TOKEN },
       cache: "no-store",
       next: {
         tags: [`events/${eventId}`],
